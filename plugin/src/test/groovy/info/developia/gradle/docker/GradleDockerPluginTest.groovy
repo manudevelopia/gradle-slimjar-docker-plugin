@@ -10,9 +10,9 @@ class GradleDockerPluginTest extends Specification {
         def project = ProjectBuilder.builder().build()
 
         when:
-        project.plugins.apply("info.developia.gradle.docker.greeting")
+        project.plugins.apply("info.developia.gradle.docker.slimjar")
 
         then:
-        project.tasks.named("greeting") != null
+        project.tasks.named("slimjar") != null
     }
 }

@@ -8,11 +8,14 @@ class DockerTask extends DefaultTask {
     @TaskAction
     def run() {
         project.configurations.runtimeClasspath.each { dependency ->
-            println "Dependencies ${dependency.name} ${dependency.path}"
             project.copy {
                 from project.layout.buildDirectory.file(dependency.path)
-                into project.layout.buildDirectory.dir("${project.buildDir}/libs")
+                into project.layout.buildDirectory.dir("${project.buildDir}/docker/slimjar")
             }
+        }
+        project.copy {
+            from "${project.buildDir}/libs/${project.name}.jar"
+            into project.layout.buildDirectory.dir("${project.buildDir}/docker-slimjar")
         }
     }
 }
