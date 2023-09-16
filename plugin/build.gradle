@@ -2,13 +2,14 @@ plugins {
     id 'java-gradle-plugin'
     id 'groovy'
     id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.1.0'
 }
 
 repositories {
     mavenCentral()
 }
 
-description = "Developia docker gradle plugin"
+description = "Developia slim jar docker gradle plugin"
 group = 'info.developia.gradle.docker.greeting'
 version = '1.0.0'
 
@@ -18,13 +19,20 @@ dependencies {
 }
 
 gradlePlugin {
+    website = 'https://github.com/manudevelopia/gradle-slimjar-docker-plugin'
+    vcsUrl = 'https://github.com/manudevelopia/gradle-slimjar-docker-plugin.git'
     plugins {
         greeting {
             id = 'info.developia.gradle.docker.greeting'
+            displayName = 'Plugin for compatibility testing of Gradle plugins'
+            description = 'A plugin that helps you test your plugin against a variety of Gradle versions'
+            tags.addAll('testing', 'integrationTesting', 'compatibility')
             implementationClass = 'info.developia.gradle.docker.GradleDockerPlugin'
         }
     }
 }
+
+
 
 sourceSets {
     functionalTest {
