@@ -23,6 +23,9 @@ class GradleDockerPluginFunctionalTest extends Specification {
         plugins {
             id 'info.developia.gradle.docker.slimjar'
         }
+        configurations {
+            runtimeClasspath
+        }
         """
 
         when:
