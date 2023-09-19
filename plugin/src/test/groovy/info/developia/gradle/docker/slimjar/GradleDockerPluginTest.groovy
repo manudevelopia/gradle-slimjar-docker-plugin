@@ -1,4 +1,4 @@
-package info.developia.gradle.docker
+package info.developia.gradle.docker.slimjar
 
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification

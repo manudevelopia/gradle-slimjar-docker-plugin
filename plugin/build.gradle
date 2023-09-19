@@ -15,7 +15,6 @@ version = '1.0.0-SNAPSHOT'
 
 dependencies {
     testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 gradlePlugin {
@@ -27,12 +26,10 @@ gradlePlugin {
             displayName = 'Plugin for compatibility testing of Gradle plugins'
             description = 'A plugin that helps you test your plugin against a variety of Gradle versions'
             tags.addAll('testing', 'integrationTesting', 'compatibility')
-            implementationClass = 'info.developia.gradle.docker.GradleDockerPlugin'
+            implementationClass = 'info.developia.gradle.docker.slimjar.GradleDockerPlugin'
         }
     }
 }
-
-
 
 sourceSets {
     functionalTest {

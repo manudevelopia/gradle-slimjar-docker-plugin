@@ -1,4 +1,4 @@
-package info.developia.gradle.docker
+package info.developia.gradle.docker.slimjar
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
@@ -12,13 +12,17 @@ class DockerTask extends DefaultTask {
         copyApplicationJar()
     }
 
-    private Iterable<File> copyApplicationDependencies() {
+    private void copyApplicationDependencies() {
         project.configurations.runtimeClasspath.each { dependency ->
             project.copy {
                 from project.layout.buildDirectory.file(dependency.path)
                 into project.layout.buildDirectory.dir("${project.buildDir}/docker/slimjar")
             }
         }
+//        project.copy {
+//            from project.configurations.runtimeClasspath
+//            into "${project.buildDir}/docker-slimjar"
+//        }
     }
 
     private WorkResult copyApplicationJar() {

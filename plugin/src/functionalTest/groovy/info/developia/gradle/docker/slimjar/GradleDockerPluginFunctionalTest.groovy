@@ -1,4 +1,4 @@
-package info.developia.gradle.docker
+package info.developia.gradle.docker.slimjar
 
 import spock.lang.Specification
 import spock.lang.TempDir
@@ -21,7 +21,7 @@ class GradleDockerPluginFunctionalTest extends Specification {
         settingsFile << ""
         buildFile << """
         plugins {
-            id('info.developia.gradle.docker.slimjar')
+            id 'info.developia.gradle.docker.slimjar'
         }
         """
 
