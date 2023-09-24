@@ -4,7 +4,7 @@ to produce Docker images that have different layers only for the real code chang
 not real changes.
 
 # why
-Bundled dependencies in fatjar make the application artifact gross and on every cheange on our code this artifact is 
+Bundled dependencies in fatjar make the application artifact gross and on every change on our code this artifact is 
 different and will be stored in a new layer. But not always is all new, fatjar contains unchanged dependencies they are 
 not real changes and should be on a different docker layer from your source code.
 
