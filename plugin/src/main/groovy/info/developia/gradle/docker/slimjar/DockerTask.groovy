@@ -10,6 +10,8 @@ class DockerTask extends DefaultTask {
     String image
     @Input
     String version
+    @Input
+    String dockerfile
 
     @TaskAction
     def run() {
@@ -37,7 +39,7 @@ class DockerTask extends DefaultTask {
         project.exec {
             workingDir project.rootDir
             executable 'docker'
-            args 'build', '-f', 'docker/Dockerfile', '.', '-t', "$image:$version"
+            args 'build', '-f', dockerfile, '.', '-t', "$image:$version"
         }
     }
 }

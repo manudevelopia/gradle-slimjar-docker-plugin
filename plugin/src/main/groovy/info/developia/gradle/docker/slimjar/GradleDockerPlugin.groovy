@@ -7,17 +7,11 @@ class GradleDockerPlugin implements Plugin<Project> {
 
     void apply(Project project) {
         def dockerExtension = createExtension(project)
-
-//        project.tasks.create('docker', DockerTask).dockerExtension = dockerExtension
-//        project.tasks.create('slimjar', DockerTask){
-//            group = "docker"
-//        }.ext = ext
-
-
         project.tasks.register("slimjar", DockerTask) {
             group = "docker"
             image = dockerExtension.image
             version = dockerExtension.version
+            dockerfile = dockerExtension.dockerfile
             doLast {
                 println "Hello from plugin 'info.developia.gradle.docker.slimjar'"
             }
@@ -29,6 +23,7 @@ class GradleDockerPlugin implements Plugin<Project> {
         extension.with {
             image = project.rootProject.name
             version = project.rootProject.version
+            dockerfile = 'docker/Dockerfile'
         }
         return extension
     }

@@ -26,6 +26,11 @@ class GradleDockerPluginFunctionalTest extends Specification {
         configurations {
             runtimeClasspath
         }
+        docker {
+            image = 'my-project'
+            version = '0.0.1'
+            dockerfile = 'docker/Dockerfile'
+        }
         """
 
         when:
