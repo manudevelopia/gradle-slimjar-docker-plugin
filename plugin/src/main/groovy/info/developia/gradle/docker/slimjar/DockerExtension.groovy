@@ -4,4 +4,5 @@ class DockerExtension {
     String image
     String version
     String dockerfile
+    String destinationFolder
 }

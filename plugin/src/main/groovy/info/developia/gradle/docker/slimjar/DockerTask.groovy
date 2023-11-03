@@ -3,7 +3,8 @@ package info.developia.gradle.docker.slimjar
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
-import org.gradle.api.tasks.WorkResult
+
+import static info.developia.gradle.docker.slimjar.GradleDockerPlugin.LIBS_FOLDER
 
 class DockerTask extends DefaultTask {
     @Input
@@ -12,34 +13,47 @@ class DockerTask extends DefaultTask {
     String version
     @Input
     String dockerfile
+    @Input
+    String destinationFolder
 
     @TaskAction
     def run() {
-        def destinationFolder = "docker-slimjar"
-        copyApplicationDependencies(destinationFolder)
-        copyApplicationJar(destinationFolder)
+        copyApplicationDependencies()
+        copyApplicationJar()
         createImage()
+        cleanUpDependencies()
     }
 
-    private void copyApplicationDependencies(String destinationFolder) {
+    private void copyApplicationDependencies() {
+        println "Copying Application Dependencies Jars to $destinationFolder"
         project.copy {
             from project.configurations.runtimeClasspath
             into project.layout.buildDirectory.dir(destinationFolder)
         }
     }
 
-    private WorkResult copyApplicationJar(String destinationFolder) {
-        project.copy {
-            from project.layout.buildDirectory.file("libs/${project.name}.jar")
-            into project.layout.buildDirectory.dir(destinationFolder)
+    private void copyApplicationJar() {
+        if (destinationFolder != LIBS_FOLDER) {
+            println "Copying Application Jar to $destinationFolder"
+            project.copy {
+                from project.layout.buildDirectory.file("$LIBS_FOLDER/${project.name}.jar")
+                into project.layout.buildDirectory.dir(destinationFolder)
+            }
         }
     }
 
     private void createImage() {
+        println "Building Docker image $image:$version from $dockerfile"
         project.exec {
             workingDir project.rootDir
             executable 'docker'
             args 'build', '-f', dockerfile, '.', '-t', "$image:$version"
+        }
+    }
+
+    private void cleanUpDependencies() {
+        project.configurations.runtimeClasspath.each { dependency ->
+            project.delete(project.layout.buildDirectory.file("$destinationFolder/$dependency.name"))
         }
     }
 }

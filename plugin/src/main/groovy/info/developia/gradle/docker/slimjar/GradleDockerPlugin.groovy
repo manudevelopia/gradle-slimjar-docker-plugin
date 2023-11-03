@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class GradleDockerPlugin implements Plugin<Project> {
+    public static final String LIBS_FOLDER = "libs"
 
     void apply(Project project) {
         def dockerExtension = createExtension(project)
@@ -12,6 +13,7 @@ class GradleDockerPlugin implements Plugin<Project> {
             image = dockerExtension.image
             version = dockerExtension.version
             dockerfile = dockerExtension.dockerfile
+            destinationFolder = dockerExtension.destinationFolder
             doLast {
                 println "Hello from plugin 'info.developia.gradle.docker.slimjar'"
             }
@@ -22,8 +24,9 @@ class GradleDockerPlugin implements Plugin<Project> {
         def extension = project.extensions.create('docker', DockerExtension)
         extension.with {
             image = project.rootProject.name
-            version = project.rootProject.version
+            version = 'latest'
             dockerfile = 'docker/Dockerfile'
+            destinationFolder = LIBS_FOLDER
         }
         return extension
     }
