@@ -8,6 +8,21 @@ Bundled dependencies in fatjar make the application artifact gross and on every 
 different and will be stored in a new layer. But not always is all new, fatjar contains unchanged dependencies they are 
 not real changes and should be on a different docker layer from your source code.
 
-https://www.google.com/search?q=no+fatjar+in+docker&rlz=1C5GCEM_en&oq=no+fatjar+in+docker&aqs=chrome..69i57.7304j0j7&sourceid=chrome&ie=UTF-8
-https://phauer.com/2019/no-fat-jar-in-docker-image/
-https://medium.com/holisticon-consultants/dont-build-fat-jars-for-docker-applications-6252a5571248
+there are some literature about that deep explain the issue:
+- https://phauer.com/2019/no-fat-jar-in-docker-image/
+- https://medium.com/holisticon-consultants/dont-build-fat-jars-for-docker-applications-6252a5571248
+
+# how to use the plugin
+Add it to your build.gradle on plugins area. Consider to use last version:
+```
+plugins {
+    id 'info.developia.gradle.docker.slimjar' version '1.0'
+}
+```
+By default plugin will use your 'rootProject.name' and 'version' to build image name, but you can override it by adding to build.gradle:
+```
+docker {
+    image 'graphql-poc'
+    version '0.0.1'
+}
+```
