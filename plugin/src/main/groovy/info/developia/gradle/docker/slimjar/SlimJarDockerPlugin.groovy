@@ -3,7 +3,7 @@ package info.developia.gradle.docker.slimjar
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class GradleDockerPlugin implements Plugin<Project> {
+class SlimJarDockerPlugin implements Plugin<Project> {
     public static final String LIBS_FOLDER = "libs"
 
     void apply(Project project) {
@@ -14,9 +14,6 @@ class GradleDockerPlugin implements Plugin<Project> {
             version = dockerExtension.version
             dockerfile = dockerExtension.dockerfile
             destinationFolder = dockerExtension.destinationFolder
-            doLast {
-                println "Hello from plugin 'info.developia.gradle.docker.slimjar'"
-            }
         }
     }
 

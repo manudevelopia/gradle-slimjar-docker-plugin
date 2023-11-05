@@ -3,7 +3,7 @@ package info.developia.gradle.docker.slimjar
 import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
-class GradleDockerPluginTest extends Specification {
+class SlimJarDockerPluginTest extends Specification {
 
     def "plugin registers task"() {
         given:

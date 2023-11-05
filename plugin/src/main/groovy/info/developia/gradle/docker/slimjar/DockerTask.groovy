@@ -4,7 +4,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 
-import static info.developia.gradle.docker.slimjar.GradleDockerPlugin.LIBS_FOLDER
+import static SlimJarDockerPlugin.LIBS_FOLDER
 
 class DockerTask extends DefaultTask {
     @Input
