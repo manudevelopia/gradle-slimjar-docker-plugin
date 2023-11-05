@@ -26,7 +26,7 @@ gradlePlugin {
             id = 'info.developia.gradle.docker.slimjar'
             displayName = 'Plugin for docker slim jar image builder'
             description = 'A plugin that helps you to generate docker images avoiding fat jars'
-            tags.addAll('testing', 'integrationTesting', 'compatibility')
+            tags.addAll('docker', 'slim', 'fat-jar')
             implementationClass = 'info.developia.gradle.docker.slimjar.SlimJarDockerPlugin'
         }
     }
