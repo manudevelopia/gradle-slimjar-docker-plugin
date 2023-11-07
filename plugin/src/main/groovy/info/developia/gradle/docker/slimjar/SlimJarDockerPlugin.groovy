@@ -14,6 +14,9 @@ class SlimJarDockerPlugin implements Plugin<Project> {
             version = dockerExtension.version
             dockerfile = dockerExtension.dockerfile
             destinationFolder = dockerExtension.destinationFolder
+            doLast {
+                println "Slim Jar Docker image $image:$version has been created"
+            }
         }
     }
 
