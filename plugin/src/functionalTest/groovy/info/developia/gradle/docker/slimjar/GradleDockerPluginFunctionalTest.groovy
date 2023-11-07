@@ -1,8 +1,8 @@
 package info.developia.gradle.docker.slimjar
 
+import org.gradle.testkit.runner.GradleRunner
 import spock.lang.Specification
 import spock.lang.TempDir
-import org.gradle.testkit.runner.GradleRunner
 
 class GradleDockerPluginFunctionalTest extends Specification {
     @TempDir
@@ -16,21 +16,30 @@ class GradleDockerPluginFunctionalTest extends Specification {
         new File(projectDir, "settings.gradle")
     }
 
+    private getDockerFile() {
+        new File(projectDir, "Dockerfile")
+    }
+
     def "can run task"() {
         given:
+        String image = "my-project"
+        String version = "0.0.1"
         settingsFile << ""
         buildFile << """
-        plugins {
-            id 'info.developia.gradle.docker.slimjar'
-        }
-        configurations {
-            runtimeClasspath
-        }
-        docker {
-            image = 'my-project'
-            version = '0.0.1'
-            dockerfile = 'docker/Dockerfile'
-        }
+            plugins {
+                id 'info.developia.gradle.docker.slimjar'
+            }
+            configurations {
+                runtimeClasspath
+            }
+            docker {
+                image = '$image'
+                version = '$version'
+                dockerfile = 'Dockerfile'
+            }
+        """
+        dockerFile << """
+            FROM hello-world:linux
         """
 
         when:
@@ -42,6 +51,6 @@ class GradleDockerPluginFunctionalTest extends Specification {
         def result = runner.build()
 
         then:
-        result.output.contains("Hello from plugin 'info.developia.gradle.docker.slimjar'")
+        result.output.containsIgnoreCase("Slim Jar Docker image $image:$version has been created")
     }
 }
