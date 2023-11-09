@@ -1,7 +1,6 @@
 plugins {
-    id 'java-gradle-plugin'
     id 'groovy'
-    id 'maven-publish'
+    id 'java-gradle-plugin'
     id 'com.gradle.plugin-publish' version '1.2.1'
     id 'signing'
 }
@@ -24,9 +23,9 @@ gradlePlugin {
     plugins {
         slimjar {
             id = 'info.developia.gradle.docker.slimjar'
-            displayName = 'Plugin for docker slim jar image builder'
-            description = 'A plugin that helps you to generate docker images avoiding fat jars'
-            tags.addAll('docker', 'slim', 'fat-jar')
+            displayName = 'Plugin for build docker slim jar image'
+            description = 'A plugin that helps you to build docker images as slim as possible avoiding fat jars'
+            tags.addAll('docker','docker build image','slim', 'fat-jar')
             implementationClass = 'info.developia.gradle.docker.slimjar.SlimJarDockerPlugin'
         }
     }
