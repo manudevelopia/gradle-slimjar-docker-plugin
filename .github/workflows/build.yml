@@ -23,16 +23,14 @@ jobs:
       - name: Create Secret File
         run: |
           echo "signing.keyId=${{ secrets.SIGNING_KEY_ID }}" > ~/.gradle/gradle.properties
-          echo "signing.secretKeyRingFile=secring.gpg" >> ~/.gradle/gradle.properties
+          echo "signing.secretKeyRingFile=~/.gradle/secring.gpg" >> ~/.gradle/gradle.properties
           echo "signing.password==${{ secrets.SIGNING_PASSWORD }}" >> ~/.gradle/gradle.properties
-          echo "SE9MQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUE=" > ~/.gradle/secring.gpg.b64
-          base64 -d ~/.gradle/secring.gpg.b64 > secring.gpg
+          echo "${{secrets.SIGNING_SECRET_KEY_RING_CONTENT}}" > ~/.gradle/secring.gpg.b64
+          base64 -d ~/.gnupg/secring.gpg.b64 > ~/.gradle/secring.gpg
       - name: Display Content
         run: cat ~/.gradle/gradle.properties
-      - name: Display secring.gpg.b64
-        run: cat ~/.gradle/secring.gpg.b64
       - name: Display secring.gpg.
-        run: cat secring.gpg
+        run: cat ~/.gradle/secring.gpg
       - name: Validate publishing Gradle Plugin
         uses: gradle/gradle-build-action@v2
         with:
