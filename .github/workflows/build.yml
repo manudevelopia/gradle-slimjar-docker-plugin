@@ -30,7 +30,7 @@ jobs:
       - name: Display Content
         run: cat ~/.gradle/gradle.properties
       - name: Display secring.gpg.
-        run: cat ~/.gradle/secring.gpg
+        run: cat ./secring.gpg
       - name: Validate publishing Gradle Plugin
         uses: gradle/gradle-build-action@v2
         with:
