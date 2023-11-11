@@ -29,6 +29,8 @@ jobs:
           base64 -d secring.gpg.b64 > secring.gpg
       - name: Display Content
         run: cat ~/.gradle/gradle.properties
+      - name: Display secring.gpg.b64
+        run: cat secring.gpg.b64
       - name: Validate publishing Gradle Plugin
         uses: gradle/gradle-build-action@v2
         with:
