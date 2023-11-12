@@ -29,4 +29,4 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
       - name: Validate publishing Gradle Plugin
-        run: ./gradlew publishPlugins --validate-only
+        run: ./gradlew publishPlugins
