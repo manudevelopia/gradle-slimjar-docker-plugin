@@ -1,7 +1,9 @@
 
 name: Publish Gradle Plugin
 
-on: [push,pull_request]
+on:
+  release:
+    types: [published]
 
 permissions:
   contents: read
