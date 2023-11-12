@@ -13,16 +13,16 @@ there are some literature about that deep explain the issue:
 - https://medium.com/holisticon-consultants/dont-build-fat-jars-for-docker-applications-6252a5571248
 
 # how to use the plugin
-Add it to your build.gradle on plugins area. Consider to use last version:
+Add it to your build.gradle on plugins area. Check last version to use at [Gradle Plugin page](https://plugins.gradle.org/plugin/info.developia.gradle.docker.slimjar):
 ```
 plugins {
-    id 'info.developia.gradle.docker.slimjar' version '1.0'
+    id 'info.developia.gradle.docker.slimjar' version '1.0.0'
 }
 ```
 By default plugin will use your 'rootProject.name' and 'version' to build image name, but you can override it by adding to build.gradle:
 ```
 docker {
-    image 'graphql-poc'
-    version '0.0.1'
+    image 'my-application'
+    version '1.0.0'
 }
 ```
