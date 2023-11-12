@@ -29,5 +29,4 @@ jobs:
       - name: Validate publishing Gradle Plugin
         uses: gradle/gradle-build-action@v2
         with:
-          arguments: build publishPlugins --validate-only
-
+          arguments: publishPlugins --validate-only
