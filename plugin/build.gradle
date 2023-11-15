@@ -11,7 +11,7 @@ repositories {
 
 description = "Developia docker slim jar gradle plugin"
 group = 'info.developia.gradle.docker.slimjar'
-version = '1.0.0'
+version = '1.0.1'
 
 dependencies {
     testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
