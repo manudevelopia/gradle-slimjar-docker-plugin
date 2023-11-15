@@ -18,10 +18,13 @@ class DockerTask extends DefaultTask {
 
     @TaskAction
     def run() {
-        copyApplicationDependencies()
-        copyApplicationJar()
-        createImage()
-        cleanUpDependencies()
+            try {
+            copyApplicationDependencies()
+            copyApplicationJar()
+            createImage()
+        } finally {
+            cleanUpDependencies()
+        }
     }
 
     private void copyApplicationDependencies() {
