@@ -29,6 +29,7 @@ class DockerTask extends DefaultTask {
         project.copy {
             from project.configurations.runtimeClasspath
             into project.layout.buildDirectory.dir(destinationFolder)
+            duplicatesStrategy 'exclude'
         }
     }
 
