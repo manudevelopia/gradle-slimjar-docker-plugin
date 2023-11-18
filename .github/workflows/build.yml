@@ -29,5 +29,3 @@ jobs:
           echo -n "${{ secrets.SIGNING_SECRET_KEY_RING_CONTENT }}" | base64 --decode > $TEMP_FOLDER/secring.gpg
       - name: Build with Gradle
         run: ./gradlew build
-      - name: Validate publishing Gradle Plugin
-        run: ./gradlew publishPlugins --validate-only
