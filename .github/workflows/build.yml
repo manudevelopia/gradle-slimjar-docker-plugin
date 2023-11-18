@@ -21,13 +21,6 @@ jobs:
         with:
           java-version: '11'
           distribution: 'corretto'
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - name: Create Secret File
-        env:
-          TEMP_FOLDER: /home/runner/work/gradle-slimjar-docker-plugin/gradle-slimjar-docker-plugin/plugin/
-        run: |
-          echo -n "${{ secrets.GRADLE_PROPERTIES }}" | base64 --decode > ~/.gradle/gradle.properties
-          echo -n "${{ secrets.SIGNING_SECRET_KEY_RING_CONTENT }}" | base64 --decode > $TEMP_FOLDER/secring.gpg
       - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
         run: ./gradlew build
