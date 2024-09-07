@@ -10,12 +10,22 @@ class SlimJarDockerPlugin implements Plugin<Project> {
         def dockerExtension = createExtension(project)
         project.tasks.register("slimjar", DockerTask) {
             group = "docker"
+            repository = dockerExtension.repository
             image = dockerExtension.image
             version = dockerExtension.version
             dockerfile = dockerExtension.dockerfile
             destinationFolder = dockerExtension.destinationFolder
             doLast {
-                println "Slim Jar Docker image $image:$version has been created"
+                println "Slim Jar Docker image $repository/$image:$version has been created"
+            }
+        }
+        project.tasks.register("publish", PublishTask) {
+            group = "docker"
+            repository = dockerExtension.repository
+            image = dockerExtension.image
+            version = dockerExtension.version
+            doLast {
+                println "Docker image $repository/$image:$version has been published"
             }
         }
     }
@@ -23,6 +33,7 @@ class SlimJarDockerPlugin implements Plugin<Project> {
     static DockerExtension createExtension(Project project) {
         def extension = project.extensions.create('docker', DockerExtension)
         extension.with {
+            repository = 'library'
             image = project.rootProject.name
             version = 'latest'
             dockerfile = 'docker/Dockerfile'

@@ -8,6 +8,8 @@ import static SlimJarDockerPlugin.LIBS_FOLDER
 
 class DockerTask extends DefaultTask {
     @Input
+    String repository
+    @Input
     String image
     @Input
     String version
@@ -32,7 +34,7 @@ class DockerTask extends DefaultTask {
         project.copy {
             from project.configurations.runtimeClasspath
             into project.layout.buildDirectory.dir(destinationFolder)
-            duplicatesStrategy 'exclude'
+            duplicatesStrategy
         }
     }
 
@@ -47,11 +49,11 @@ class DockerTask extends DefaultTask {
     }
 
     private void createImage() {
-        println "Building Docker image $image:$version from $dockerfile"
+        println "Building Docker image $repository$image:$version from $dockerfile"
         project.exec {
             workingDir project.rootDir
             executable 'docker'
-            args 'build', '-f', dockerfile, '.', '-t', "$image:$version"
+            args 'build', '-f', dockerfile, '.', '-t', "$repository/$image:$version"
         }
     }
 

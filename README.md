@@ -22,13 +22,15 @@ For a more in-depth explanation of this issue, refer to the following resources:
 
    ```groovy
    plugins {
-       id 'info.developia.gradle.docker.slimjar' version '1.0.1'
+       id 'info.developia.gradle.docker.slimjar' version '1.0.2'
    }
 
-By default, the plugin uses the rootProject.name and version to build the image name. You can override this by adding a docker block to your build.gradle file.
+By default, the plugin uses the rootProject.name and 'latest' version to build the image name. You can override this by adding a docker block to your build.gradle file.
 ```
 docker {
+    repository 'my-repository'
     image 'my-application'
     version '1.0.0'
+    dockerfile 'Dockerfile'
 }
 ```

@@ -11,9 +11,10 @@ repositories {
 
 description = "Developia docker slim jar gradle plugin"
 group = 'info.developia.gradle.docker.slimjar'
-version = '1.0.1'
+version = '1.0.2'
 
 dependencies {
+    compileOnly 'org.codehaus.groovy:groovy:3.0.19'
     testImplementation 'org.spockframework:spock-core:2.2-groovy-3.0'
 }
 

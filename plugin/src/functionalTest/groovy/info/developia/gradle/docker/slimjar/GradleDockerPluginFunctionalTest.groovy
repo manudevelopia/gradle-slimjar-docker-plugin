@@ -22,6 +22,7 @@ class GradleDockerPluginFunctionalTest extends Specification {
 
     def "can run task"() {
         given:
+        String repository = "my-repository"
         String image = "my-project"
         String version = "0.0.1"
         settingsFile << ""
@@ -33,6 +34,7 @@ class GradleDockerPluginFunctionalTest extends Specification {
                 runtimeClasspath
             }
             docker {
+                repository = '$repository'
                 image = '$image'
                 version = '$version'
                 dockerfile = 'Dockerfile'
@@ -43,14 +45,14 @@ class GradleDockerPluginFunctionalTest extends Specification {
         """
 
         when:
-        def runner = GradleRunner.create()
-        runner.forwardOutput()
-        runner.withPluginClasspath()
-        runner.withArguments("slimjar")
-        runner.withProjectDir(projectDir)
-        def result = runner.build()
+        def result = GradleRunner.create()
+                .forwardOutput()
+                .withPluginClasspath()
+                .withArguments("slimjar")
+                .withProjectDir(projectDir)
+                .build()
 
         then:
-        result.output.containsIgnoreCase("Slim Jar Docker image $image:$version has been created")
+        result.output.containsIgnoreCase("Slim Jar Docker image $repository/$image:$version has been created")
     }
 }
